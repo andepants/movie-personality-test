@@ -1,6 +1,10 @@
-import Link from 'next/link'
+"use client"
+import React from 'react';
+import Recommendation from '../component/Recommendation';
+import Link from 'next/link';
 
 export default function Home() {
+  const searchQuery = 'Romantic Comadies';
   return (
     <main>
       <h1 className="flex m-5 p-2 justify-center text-5xl font-bold text-gray-800 mb-4">Movie Personality Test</h1>
@@ -15,6 +19,7 @@ export default function Home() {
           Results
         </button>
       </Link>
+      <Recommendation searchQuery={searchQuery} />
     </main>
   )
 }
