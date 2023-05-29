@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link'
-import questions from '../../../public/questions'
+import { questions } from '../../../public/questions'
 import { useEffect, useState } from 'react';
 
 export default function Quiz() {

@@ -1,4 +1,4 @@
-export default questions = [
+export const questions = [
   {
     "question": "Are you more introverted or extroverted?",
     "answerOptions": [
