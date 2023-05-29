@@ -26,6 +26,7 @@ export default function Quiz() {
   };
 
   return (
+<<<<<<< HEAD
     <main className="flex flex-col w-screen px-5 h-screen bg-darkblue justify-center items-center">
       <div className="bg-darkblue p-20 m-5 rounded-xl">
         <div className="flex flex-col items-start w-full">
@@ -78,6 +79,10 @@ export default function Quiz() {
 
 
 
+=======
+    <main>
+      <h1 className="flex m-5 p-2 justify-center text-5xl font-bold text-gray-800 mb-4">This is the quiz component</h1>
+>>>>>>> main
       <Link href='/' className="flex justify-center">
         <button className="px-4 m-2 py-2 rounded bg-blue-500 text-white font-bold">
           Home
