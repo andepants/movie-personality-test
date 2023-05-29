@@ -14,8 +14,8 @@ const testData = {
 export default function Results() {
   return (
     <main>
-      {testData.movies.map((movie) => (
-        <Movie movieTitle={movie} />
+      {testData.movies.map((movie, index) => (
+        <Movie key={index} movieTitle={movie} />
       ))}
 
       <Link href="/" className="flex justify-center">
