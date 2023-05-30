@@ -6,13 +6,13 @@ import "./movie.css";
 export default function Movie(props) {
   const { movieID } = props;
   const [data, setData] = useState(null);
+  const [posterPath, setPosterPath] = useState(null);
 
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
-    console.log(`movie ID: ${movieID}`);
     try {
       const response = await fetch("/api/imageAPI", {
         method: "POST",
@@ -20,17 +20,26 @@ export default function Movie(props) {
       });
       const responseData = await response.json();
       setData(responseData);
-      console.log("response data: ");
+      setPosterPath(
+        `https://image.tmdb.org/t/p/original${responseData.poster_path}`
+      );
       console.log(responseData);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
+  if (!data) {
+    return;
+  }
+
   return (
-    <div className="h-1/2vh">
-      <p>{movieID}</p>
-      <img className="movie-image" src={data} />
+    <div className="h-1/2vh p-8 bg-gray-900 text-white">
+      <h1 className="text-4xl font-bold mb-4">{data.original_title}</h1>
+      <div className="flex items-center">
+        <img className="movie-image rounded-md mr-4" src={posterPath} />
+        <p className="flex-grow">{data.overview}</p>
+      </div>
     </div>
   );
 }

@@ -2,7 +2,6 @@ async function callMovieAPI(movieID) {
   const key = process.env.TMDBKEY;
   const url = `https://api.themoviedb.org/3/movie/${movieID}`;
 
-  console.log(url);
   const apiResponse = await fetch(url, {
     method: "GET",
     headers: {
@@ -11,20 +10,16 @@ async function callMovieAPI(movieID) {
     },
   });
   const response = await apiResponse.json();
-  return `https://image.tmdb.org/t/p/original${response.poster_path}`;
+  return response;
 }
 
 export default async function handler(req, res) {
   let method = req.method;
-  if (method === "GET") {
-    console.log("image request received");
-    res.status(200);
-  }
 
   if (method === "POST") {
     callMovieAPI(req.body)
-      .then((posterUrl) => {
-        res.status(200).json(posterUrl);
+      .then((data) => {
+        res.status(200).json(data);
       })
       .catch((err) => {
         res.status(500).json({ error: err });
