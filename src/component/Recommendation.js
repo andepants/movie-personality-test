@@ -19,16 +19,14 @@ const Recommendation = ({ searchQuery }) => {
         const intersection = queryVector.filter((tag) =>
           movieVector.includes(tag)
         );
-        // Give more weight to genres by multiplying the intersection length with a weight factor
-        const weightFactor = 2;
-        const genresIntersection = queryVector.filter((tag) => movie.genres.includes(tag));
-        const weightedIntersectionLength = intersection.length + weightFactor * genresIntersection.length;
-        
-        return (weightedIntersectionLength / Math.sqrt(queryVector.length * movieVector.length));
-      
+        const cosineSimilarity =
+          intersection.length /
+          Math.sqrt(queryVector.length * movieVector.length);
+        return cosineSimilarity;
       });
       return similarities;
     }
+    
 
     // Get movie recommendations based on a search query
     function getMovieRecommendations(query, movies, topN = 5) {
@@ -62,7 +60,7 @@ const Recommendation = ({ searchQuery }) => {
       // Get final recommendations with genre and keywords
       const recommendations = sortedRecommendations.map(({ index }) => ({
         title: movies[index].title,
-        genre: movies[index].genres,
+        genres: movies[index].genres,
         keywords: movies[index].tags,
         overview: movies[index].storyline,
       }));
@@ -82,7 +80,7 @@ const Recommendation = ({ searchQuery }) => {
             <strong>{index + 1}. </strong>
             <span>{recommendation.title}</span>
             <br />
-            <span>Genre: {recommendation.genre}</span>
+            <span>Genre: {recommendation.genres}</span>
             <br />
             <span>Overview: {recommendation.overview}</span>
             <br />
