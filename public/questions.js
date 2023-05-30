@@ -1,47 +1,138 @@
 export const questions = [
   {
-    "question": "Are you more introverted or extroverted?",
+    "question": "When faced with a new challenge, I feel:",
     "answerOptions": [
-      { "answer": "Introverted" },
-      { "answer": "Extroverted" },
-      { "answer": "A combination of both" },
-      { "answer": "I'm not sure" }
+      {
+        "answer": "Excited and eager to explore new possibilities."
+      },
+      {
+        "answer": "Anxious but willing to take calculated risks."
+      },
+      {
+        "answer": "Intrigued and curious to unravel the unknown."
+      },
+      {
+        "answer": "Playful and inclined to find humor in the situation."
+      }
     ]
   },
   {
-    "question": "How do you handle stressful situations?",
+    "question": "My ideal way to spend free time is:",
     "answerOptions": [
-      { "answer": "I remain calm and composed" },
-      { "answer": "I get anxious and overwhelmed" },
-      { "answer": "It depends on the situation" },
-      { "answer": "I haven't really thought about it" }
+      {
+        "answer": "Engaging in artistic activities like painting, writing, or playing an instrument."
+      },
+      {
+        "answer": "Seeking thrilling adventures or trying out extreme sports."
+      },
+      {
+        "answer": "Exploring mysterious places or indulging in suspenseful novels and movies."
+      },
+      {
+        "answer": "Socializing and making people laugh through jokes or storytelling."
+      }
     ]
   },
   {
-    "question": "What motivates you the most?",
+    "question": "When faced with a problem, I tend to:",
     "answerOptions": [
-      { "answer": "Recognition and rewards" },
-      { "answer": "Helping others and making a difference" },
-      { "answer": "Achieving personal growth and learning" },
-      { "answer": "I'm not sure" }
+      {
+        "answer": "Approach it from different angles and explore unconventional solutions."
+      },
+      {
+        "answer": "Take immediate action and rely on my instincts."
+      },
+      {
+        "answer": "Delve deep into research and gather information before making a decision."
+      },
+      {
+        "answer": "Use humor and wit to diffuse tension and find a creative solution."
+      }
     ]
   },
-  {
-    "question": "How do you handle criticism?",
-    "answerOptions": [
-      { "answer": "I take it personally and feel discouraged" },
-      { "answer": "I try to learn from it and improve" },
-      { "answer": "I don't really pay much attention to criticism" },
-      { "answer": "It depends on the source of criticism" }
-    ]
-  },
-  {
-    "question": "Are you more of a planner or spontaneous?",
-    "answerOptions": [
-      { "answer": "I prefer having a detailed plan" },
-      { "answer": "I enjoy being spontaneous" },
-      { "answer": "It varies depending on the situation" },
-      { "answer": "I haven't really thought about it" }
-    ]
-  }
+  // {
+  //   "question": "In group settings, I am often seen as:",
+  //   "answerOptions": [
+  //     {
+  //       "answer": "The imaginative and artistic one."
+  //     },
+  //     {
+  //       "answer": "The adventurous and daring one."
+  //     },
+  //     {
+  //       "answer": "The enigmatic and mysterious one."
+  //     },
+  //     {
+  //       "answer": "The funny and entertaining one."
+  //     }
+  //   ]
+  // },
+  // {
+  //   "question": "When it comes to trying new things, I am:",
+  //   "answerOptions": [
+  //     {
+  //       "answer": "Open-minded and eager to explore uncharted territories."
+  //     },
+  //     {
+  //       "answer": "Willing to take risks and step out of my comfort zone."
+  //     },
+  //     {
+  //       "answer": "Intrigued by unconventional ideas and unconventional ways of thinking."
+  //     },
+  //     {
+  //       "answer": "Quick-witted and willing to experiment with humor and creativity."
+  //     }
+  //   ]
+  // },
+  // {
+  //   "question": "My friends would describe me as:",
+  //   "answerOptions": [
+  //     {
+  //       "answer": "Dreamy and romantic."
+  //     },
+  //     {
+  //       "answer": "Fearless and adventurous."
+  //     },
+  //     {
+  //       "answer": "Mysterious and intriguing."
+  //     },
+  //     {
+  //       "answer": "Funny and entertaining."
+  //     }
+  //   ]
+  // },
+  // {
+  //   "question": "I am most inspired by:",
+  //   "answerOptions": [
+  //     {
+  //       "answer": "Artistic expressions and creative works."
+  //     },
+  //     {
+  //       "answer": "Thrilling experiences and adrenaline-inducing activities."
+  //     },
+  //     {
+  //       "answer": "Enigmatic stories and complex concepts."
+  //     },
+  //     {
+  //       "answer": "Humor and comedic performances."
+  //     }
+  //   ]
+  // },
+  // {
+  //   "question": "When faced with a difficult decision, I rely on:",
+  //   "answerOptions": [
+  //     {
+  //       "answer": "My intuition and gut feelings."
+  //     },
+  //     {
+  //       "answer": "My willingness to take risks and embrace challenges."
+  //     },
+  //     {
+  //       "answer": "In-depth analysis and thoughtful consideration."
+  //     },
+  //     {
+  //       "answer": "My sense of humor and ability to find unconventional solutions."
+  //     }
+  //   ]
+  // }
 ]

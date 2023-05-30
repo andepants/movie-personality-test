@@ -7,15 +7,20 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function Quiz() {
 
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [ currentQuestion, setCurrentQuestion ] = useState(0);
+  const [ selectedOptions, setSelectedOptions ] = useState([]);
+  const [ searchString, setSearchString ] = useState('');
 
   const handleAnswerOption = (answer) => {
     setSelectedOptions([
       (selectedOptions[currentQuestion] = { userResponse: answer }),
     ]);
     setSelectedOptions([...selectedOptions]);
-    console.log(selectedOptions, 'selectedOptions');
+    let search = '';
+    for (let i = 0; i < selectedOptions.length; i++) {
+      search += selectedOptions[i].userResponse + ' ';
+    }
+    setSearchString(search);
   };
 
   const handlePrevious = () => {
@@ -24,9 +29,7 @@ export default function Quiz() {
   };
 
   const handleNext = () => {
-    console.log(selectedOptions[currentQuestion]?.userResponse, 'selectedOptions[currentQuestion]?.userResponse')
     if (!selectedOptions[currentQuestion]?.userResponse) {
-      console.log('inside error');
       toast.error('Choose an Option!', {
         position: "top-center",
         autoClose: 1000,
@@ -41,11 +44,6 @@ export default function Quiz() {
     }
     const nextQues = currentQuestion + 1;
     nextQues < questions.length && setCurrentQuestion(nextQues);
-  };
-
-  const handleSubmit = () => {
-    console.log(selectedOptions, 'selectedOptions')
-    console.log('inside handleSubmit');
   };
 
   return (
@@ -94,7 +92,7 @@ export default function Quiz() {
                 href={{
                   pathname: '/results',
                   query: {
-                    search: 'romantic comedies'
+                    search: searchString
                   }
                 }}
                 className="w-[49%] py-3 bg-pink rounded-lg text-center"
