@@ -27,7 +27,7 @@ function getMovieRecommendations(query) {
     }
 
     // Get movie recommendations based on a search query
-    function getMovieRecommendations(query, movies, topN = 5) {
+    function getMovieRecommendations(query, movies, topN = 20) {
       // Calculate cosine similarity
       const similarities = calculateCosineSimilarity(query, movies);
 
@@ -46,7 +46,10 @@ function getMovieRecommendations(query) {
         genres: movies[index].genres,
         keywords: movies[index].tags,
         overview: movies[index].storyline,
+        popularity: movies[index].popularity,
       }));
+
+      recommendations.sort((a, b) => b.popularity - a.popularity);
 
       return recommendations;
     }
