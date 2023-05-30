@@ -50,7 +50,7 @@ export default function Results(props) {
   //   console.log(movie.movieId);
   // });
   return (
-    <main>
+    <main className="bg-gray-900">
       {movies.map((movie) => (
         <Movie movieID={movie.movieId} key={movie.movieId} />
       ))}
