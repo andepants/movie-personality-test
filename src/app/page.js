@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 
 export default function Home() {
-  const searchQuery = "Romantic Comedy";
+  const searchQuery = "blue space invader";
 
   return (
     <main>
@@ -18,7 +18,7 @@ export default function Home() {
         </button>
       </Link>
       <Link
-        href={{ pathname: "/results", query: searchQuery}}
+        href={{ pathname: "/results", query: searchQuery }}
         className="flex justify-center"
       >
         <button className="px-4 m-2 py-2 rounded bg-blue-500 text-white font-bold">

@@ -1,13 +1,18 @@
 "use client";
 import Link from "next/link";
 import Movie from "./Movie.jsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Results(props) {
   const [movies, setMovies] = useState(null);
   // console.log("props: ", Object.keys(props.searchParams)[0])
 
   const searchQuery = Object.keys(props.searchParams)[0];
+
+  useEffect(() => {
+    getMovieRecommendations(searchQuery);
+    return () => {};
+  }, []);
 
   async function getMovieRecommendations(query) {
     try {
@@ -16,17 +21,31 @@ export default function Results(props) {
         body: searchQuery,
       });
       const responseData = await response.json();
-      setMovies(responseData);
+
+      let filteredMovies = [];
+      let i = 0;
+      const englishRegexp = /^[a-zA-Z0-9\s]+$/;
+      while (filteredMovies.length != 5) {
+        if (
+          responseData[i].title &&
+          englishRegexp.test(responseData[i].title) &&
+          responseData[i].overview.trim()
+        ) {
+          console.log(responseData[i]);
+          filteredMovies.push(responseData[i]);
+        }
+        i++;
+      }
+
+      setMovies(filteredMovies);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   }
 
-  getMovieRecommendations(searchQuery);
   if (!movies) {
     return;
   }
-  console.log("movie recommendations:" + movies);
   // movieRecommendations.forEach((movie) => {
   //   console.log(movie.movieId);
   // });
