@@ -3,19 +3,34 @@ import Movie from "./Movie.jsx";
 
 const testData = {
   movies: [
-    "The Shawshank Redemption",
-    "The Godfather",
-    "Pulp Fiction",
-    "The Dark Knight",
-    "Fight Club",
+    {
+      title: "Batman Begins",
+      tmdb_id: 272,
+    },
+    {
+      title: "The Dark Knight",
+      tmdb_id: 155,
+    },
+    {
+      title: "Pulp Fiction",
+      tmdb_id: 680,
+    },
+    {
+      title: "The Shawshank Redemption",
+      tmdb_id: 278,
+    },
+    {
+      title: "Fight Club",
+      tmdb_id: 550,
+    },
   ],
 };
 
 export default function Results() {
   return (
     <main>
-      {testData.movies.map((movie, index) => (
-        <Movie key={index} movieTitle={movie} />
+      {testData.movies.map((movie) => (
+        <Movie movieID={movie.tmdb_id} />
       ))}
 
       <Link href="/" className="flex justify-center">
