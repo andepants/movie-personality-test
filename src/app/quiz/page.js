@@ -89,12 +89,26 @@ export default function Quiz() {
           >
             Previous
           </button>
-          <button
-            onClick={currentQuestion + 1 === questions.length ? handleSubmit : handleNext}
-            className="w-[49%] py-3 bg-pink rounded-lg"
-          >
-            {currentQuestion + 1 === questions.length ? 'Submit' : 'Next'}
-          </button>
+          {currentQuestion + 1 === questions.length
+            ? <Link
+                href={{
+                  pathname: '/results',
+                  query: {
+                    search: 'romantic comedies'
+                  }
+                }}
+                className="w-[49%] py-3 bg-pink rounded-lg text-center"
+              >
+                <button>Submit</button>
+              </Link>
+            : <button
+                onClick={handleNext}
+                className="w-[49%] py-3 bg-pink rounded-lg"
+              >
+                Next
+              </button>
+          }
+
         </div>
       </div>
 
