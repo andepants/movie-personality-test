@@ -91,9 +91,7 @@ export default function Quiz() {
             ? <Link
                 href={{
                   pathname: '/results',
-                  query: {
-                    search: searchString
-                  }
+                  query: searchString,
                 }}
                 className="w-[49%] py-3 bg-pink rounded-lg text-center"
               >
