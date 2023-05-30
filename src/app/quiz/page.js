@@ -2,6 +2,8 @@
 import Link from 'next/link'
 import { questions } from '../../../public/questions'
 import { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Quiz() {
 
@@ -10,9 +12,10 @@ export default function Quiz() {
 
   const handleAnswerOption = (answer) => {
     setSelectedOptions([
-      (selectedOptions[currentQuestion] = { answerByUser: answer }),
+      (selectedOptions[currentQuestion] = { userResponse: answer }),
     ]);
     setSelectedOptions([...selectedOptions]);
+    console.log(selectedOptions, 'selectedOptions');
   };
 
   const handlePrevious = () => {
@@ -21,8 +24,28 @@ export default function Quiz() {
   };
 
   const handleNext = () => {
+    console.log(selectedOptions[currentQuestion]?.userResponse, 'selectedOptions[currentQuestion]?.userResponse')
+    if (!selectedOptions[currentQuestion]?.userResponse) {
+      console.log('inside error');
+      toast.error('Choose an Option!', {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+      return;
+    }
     const nextQues = currentQuestion + 1;
     nextQues < questions.length && setCurrentQuestion(nextQues);
+  };
+
+  const handleSubmit = () => {
+    console.log(selectedOptions, 'selectedOptions')
+    console.log('inside handleSubmit');
   };
 
   return (
@@ -50,7 +73,7 @@ export default function Quiz() {
                 value={answer.answer}
                 onChange={(e) => handleAnswerOption(answer.answer)}
                 checked={
-                  answer.answer === selectedOptions[currentQuestion]?.answerByUser
+                  answer.answer === selectedOptions[currentQuestion]?.userResponse
                 }
                 className="w-6 h-6 bg-black"
               />
@@ -67,22 +90,32 @@ export default function Quiz() {
             Previous
           </button>
           <button
-            onClick={handleNext}
+            onClick={currentQuestion + 1 === questions.length ? handleSubmit : handleNext}
             className="w-[49%] py-3 bg-pink rounded-lg"
           >
-            Next
+            {currentQuestion + 1 === questions.length ? 'Submit' : 'Next'}
           </button>
         </div>
-
       </div>
-
-
 
       <Link href='/' className="flex justify-center">
         <button className="px-4 m-2 py-2 rounded bg-blue-500 text-white font-bold">
           Home
         </button>
       </Link>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        limit={2}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </main>
   )
 }
