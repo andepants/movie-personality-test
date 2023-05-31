@@ -9,24 +9,23 @@ export default function Movie(props) {
   const [posterPath, setPosterPath] = useState(null);
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/imageAPI", {
+          method: "POST",
+          body: movieID,
+        });
+        const responseData = await response.json();
+        setData(responseData);
+        setPosterPath(
+          `https://image.tmdb.org/t/p/original${responseData.poster_path}`
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
     fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      const response = await fetch("/api/imageAPI", {
-        method: "POST",
-        body: movieID,
-      });
-      const responseData = await response.json();
-      setData(responseData);
-      setPosterPath(
-        `https://image.tmdb.org/t/p/original${responseData.poster_path}`
-      );
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+  }, [ movieID ]);
 
   if (!data) {
     return;
