@@ -37,7 +37,7 @@ export default function Movie(props) {
       <h1 className="text-4xl font-bold mb-4">{data.title}</h1>
       <div className="flex items-center">
         <Image className="rounded-md mr-4" src={posterPath} width="200" height="300" alt="movie poster" />
-        <p className="flex-grow">{data.overview}</p>
+        <p className="flex-grow text-justify justify-center">{data.overview}</p>
       </div>
     </div>
   );
