@@ -7,17 +7,20 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function Quiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [searchString, setSearchString] = useState("");
 
-  const handleAnswerOption = (answer) => {
+  const handleAnswerOption = (answer, keywords) => {
+    keywords = keywords || "";
     setSelectedOptions([
-      (selectedOptions[currentQuestion] = { userResponse: answer }),
+      (selectedOptions[currentQuestion] = { userResponse: answer, keywords: keywords }),
     ]);
     setSelectedOptions([...selectedOptions]);
+
     let search = "";
     for (let i = 0; i < selectedOptions.length; i++) {
-      search += selectedOptions[i].userResponse + " ";
+      search += selectedOptions[i].keywords + " ";
     }
     setSearchString(search);
   };
@@ -62,13 +65,13 @@ export default function Quiz() {
             <div
               key={index}
               className="flex items-center w-full py-4 pl-5 m-2 ml-0 space-x-2 border-2 cursor-pointer bg-gray-800 border-white/10 rounded-xl"
-              onClick={(e) => handleAnswerOption(answer.answer)}
+              onClick={(e) => handleAnswerOption(answer.answer, answer.keywords)}
             >
               <input
                 type="radio"
                 name={answer.answer}
                 value={answer.answer}
-                onChange={(e) => handleAnswerOption(answer.answer)}
+                onChange={(e) => handleAnswerOption(answer.answer, answer.keywords)}
                 checked={
                   answer.answer ===
                   selectedOptions[currentQuestion]?.userResponse
