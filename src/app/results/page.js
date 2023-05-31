@@ -8,20 +8,38 @@ export default function Results(props) {
   console.log(props);
   const { searchQuery, personalityTitle, personalityDescription } =
     props.searchParams;
+  const keywords = Object.keys(props.searchParams)[0];
+  const [ personalityData, setPersonalityData ] = useState(null);
 
   useEffect(() => {
     console.log(searchQuery);
     console.log(personalityTitle);
     console.log(personalityDescription);
-    getMovieRecommendations(searchQuery);
+    console.log(Object.keys(props.searchParams)[0]);
+    getPersonalityType(keywords);
+    getMovieRecommendations(keywords);
     return () => {};
   }, []);
+
+  useEffect(() => {
+    console.log('this is personalityData', personalityData);
+  }, [ personalityData ])
+
+  async function getPersonalityType(keywords) {
+    let personalityData = await fetch('/api/personality' , {
+      method: 'POST',
+      body: JSON.stringify({ keywords : keywords})
+    })
+    personalityData = await personalityData.json();
+    setPersonalityData(personalityData.data);
+    console.log('personalityData: ', personalityData);
+  }
 
   async function getMovieRecommendations(query) {
     try {
       const response = await fetch("/api/recommendationAPI", {
         method: "POST",
-        body: searchQuery,
+        body: query,
       });
       const responseData = await response.json();
 
@@ -58,8 +76,8 @@ export default function Results(props) {
           {personalityTitle ? personalityTitle : "No Personality"}
         </h2>
         <p>
-          {personalityDescription
-            ? personalityDescription
+          {personalityData
+            ? personalityData
             : "No personality description was provided."}
         </p>
       </div>
