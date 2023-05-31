@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Home() {
   const query = "blue space invader";
-  // const personalityData = "Adventurous";
+  const personalityData = "Adventurous";
   const personalityDescriptionData =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vitae commodo tellus. Sed eu tristique elit. Vestibulum ac orci condimentum, ullamcorper risus eu, fermentum neque. Integer ullamcorper est nec ligula lobortis, in dictum massa aliquet. Nam volutpat ligula quis feugiat tempus. Quisque eleifend neque ac feugiat rutrum. Suspendisse potenti. Sed pharetra pellentesque risus non tempus. Mauris ut quammi. Aliquam eu purus vitae ex tincidunt rutrum at vel tellus. Prointempor nibh vel venenatis egestas. Curabitur dapibus augue at nislvolutpat, id finibus massa tristique. Suspendisse potenti. Donec sitamet diam ac quam feugiat congue ut non ex. Sed dictum tortor id enimhendrerit feugiat. Donec sit amet diam ac quam feugiat congue ut nonex. Sed dictum tortor id enim hendrerit feugiat.";
   return (
