@@ -23,7 +23,6 @@ export default function Movie(props) {
       setPosterPath(
         `https://image.tmdb.org/t/p/original${responseData.poster_path}`
       );
-      console.log(responseData);
     } catch (error) {
       console.error("Error fetching data:", error);
     }

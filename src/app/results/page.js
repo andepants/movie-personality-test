@@ -5,11 +5,14 @@ import { useState, useEffect } from "react";
 
 export default function Results(props) {
   const [movies, setMovies] = useState(null);
-  // console.log("props: ", Object.keys(props.searchParams)[0])
-
-  const searchQuery = Object.keys(props.searchParams)[0];
+  console.log(props);
+  const { searchQuery, personalityTitle, personalityDescription } =
+    props.searchParams;
 
   useEffect(() => {
+    console.log(searchQuery);
+    console.log(personalityTitle);
+    console.log(personalityDescription);
     getMovieRecommendations(searchQuery);
     return () => {};
   }, []);
@@ -31,7 +34,6 @@ export default function Results(props) {
           englishRegexp.test(responseData[i].title) &&
           responseData[i].overview.trim()
         ) {
-          console.log(responseData[i]);
           filteredMovies.push(responseData[i]);
         }
         i++;
@@ -51,9 +53,21 @@ export default function Results(props) {
   // });
   return (
     <main className="bg-gray-900">
-      {movies.map((movie) => (
-        <Movie movieID={movie.movieId} key={movie.movieId} />
-      ))}
+      <div className="text-white text-xl p-5 w-3/4">
+        <h2 className="text-4xl font-bold mb-4">
+          {personalityTitle ? personalityTitle : "No Personality"}
+        </h2>
+        <p>
+          {personalityDescription
+            ? personalityDescription
+            : "No personality description was provided."}
+        </p>
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        {movies.map((movie) => (
+          <Movie movieID={movie.movieId} key={movie.movieId} />
+        ))}
+      </div>
       <Link href="/" className="flex justify-center">
         <button className="px-4 m-2 py-2 rounded bg-blue-500 text-white font-bold">
           Home
