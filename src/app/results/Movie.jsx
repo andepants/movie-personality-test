@@ -23,7 +23,6 @@ export default function Movie(props) {
       setPosterPath(
         `https://image.tmdb.org/t/p/original${responseData.poster_path}`
       );
-      console.log(responseData);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -35,7 +34,7 @@ export default function Movie(props) {
 
   return (
     <div className="h-1/2vh p-8 bg-gray-900 text-white">
-      <h1 className="text-4xl font-bold mb-4">{data.original_title}</h1>
+      <h1 className="text-4xl font-bold mb-4">{data.title}</h1>
       <div className="flex items-center">
         <img className="movie-image rounded-md mr-4" src={posterPath} />
         <p className="flex-grow">{data.overview}</p>
