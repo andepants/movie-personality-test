@@ -5,25 +5,21 @@ import { useState, useEffect } from "react";
 
 export default function Results(props) {
   const [movies, setMovies] = useState(null);
-  console.log(props);
+  // console.log(props);
   const { searchQuery, personalityTitle, personalityDescription } =
     props.searchParams;
   const keywords = Object.keys(props.searchParams)[0];
   const [ personalityData, setPersonalityData ] = useState(null);
 
   useEffect(() => {
-    console.log(searchQuery);
-    console.log(personalityTitle);
-    console.log(personalityDescription);
-    console.log(Object.keys(props.searchParams)[0]);
+    // console.log(searchQuery);
+    // console.log(personalityTitle);
+    // console.log(personalityDescription);
+    // console.log(Object.keys(props.searchParams)[0]);
     getPersonalityType(keywords);
     getMovieRecommendations(keywords);
     return () => {};
   }, []);
-
-  useEffect(() => {
-    console.log('this is personalityData', personalityData);
-  }, [ personalityData ])
 
   async function getPersonalityType(keywords) {
     let personalityData = await fetch('/api/personality' , {
@@ -31,15 +27,15 @@ export default function Results(props) {
       body: JSON.stringify({ keywords : keywords})
     })
     personalityData = await personalityData.json();
-    setPersonalityData(personalityData.data);
-    console.log('personalityData: ', personalityData);
+    personalityData = await JSON.parse(personalityData.data);
+    setPersonalityData(personalityData);
   }
 
   async function getMovieRecommendations(query) {
     try {
       const response = await fetch("/api/recommendationAPI", {
         method: "POST",
-        body: query,
+        body: {query},
       });
       const responseData = await response.json();
 
@@ -73,12 +69,12 @@ export default function Results(props) {
     <main className="bg-gray-900">
       <div className="text-white text-xl p-5 w-3/4">
         <h2 className="text-4xl font-bold mb-4">
-          {personalityTitle ? personalityTitle : "No Personality"}
+          {personalityData ? personalityData?.title : "Loading personality title"}
         </h2>
         <p>
           {personalityData
-            ? personalityData
-            : "No personality description was provided."}
+            ? personalityData?.summary
+            : "Loading personality description"}
         </p>
       </div>
       <div className="grid grid-cols-2 gap-4">

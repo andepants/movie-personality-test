@@ -2,8 +2,8 @@ const getPersonalityType = async (keywords) => {
   // console.log('keywords: ', keywords);
   // const apiKey = process.env.OPENAI_API_KEY;
   // const model = "text-davinci-003";
-  // const maxTokens = 100;
-  // let finalPrompt = 'Can you give me a personality type for the following keywords: ' + keywords;
+  // const maxTokens = 200;
+  // let finalPrompt = `Give me a personality title AND a 1 sentence of a personality summary starting with "You are". Keywords: ${keywords} Formatted { "title" :  "title", "summary": "summary" }`;
 
   // const apiUrl = `https://api.openai.com/v1/engines/${model}/completions`;
   // const headers = {
@@ -29,7 +29,8 @@ const getPersonalityType = async (keywords) => {
   //   console.log('error', error);
   //   return error;
   // }
-  return 'You are an Adventurous person!';
+  // return 'You are an Adventurous person!';
+  return `{ "title": "Detective of Suspense and Mysteries", "summary": "You are a Detective of Suspense and Mysteries, known for your skill in unravelling even the darkest of murder and thriller cases." }`;
 };
 
 export default async function handler(req, res) {
@@ -38,7 +39,6 @@ export default async function handler(req, res) {
 
   if (method === "POST") {
     let data = await getPersonalityType(body.keywords);
-    console.log('data: ', data);
     res.status(200).json({ data });
   }
 }
