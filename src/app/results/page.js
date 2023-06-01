@@ -12,7 +12,7 @@ export default function Results(props) {
   useEffect(() => {
     getMovieRecommendations(keywords); // Call getMovieRecommendations directly
     return () => {};
-  }, []);
+  }, [keywords]);
 
   async function getPersonalityType(filteredMovies) {
     let personalityData = await fetch("/api/personality", {
@@ -31,24 +31,24 @@ export default function Results(props) {
     try {
       const response = await fetch("/api/recommendationAPI", {
         method: "POST",
-        body: JSON.stringify({ query }),
+        body: query,
       });
       const responseData = await response.json();
-
       let filteredMovies = [];
       let i = 0;
       const englishRegexp = /^[a-zA-Z0-9\s]+$/;
-      while (filteredMovies.length !== 5) {
-        if (
-          responseData[i].title &&
-          englishRegexp.test(responseData[i].title) &&
-          responseData[i].overview.trim()
+      while (filteredMovies.length != 5) {
+        // console.log('responseData[i].title: ', responseData[i].title);
+        // console.log('filteredMovies: ', filteredMovies)
+        if ( true
+          // responseData[i].title &&
+          // englishRegexp.test(responseData[i].title) &&
+          // responseData[i].overview.trim()
         ) {
           filteredMovies.push(responseData[i]);
         }
         i++;
       }
-
       setMovies(filteredMovies);
       getPersonalityType(filteredMovies); // Call getPersonalityType with filteredMovies
     } catch (error) {
@@ -56,13 +56,20 @@ export default function Results(props) {
     }
   }
 
-  if (!movies) {
-    return null; // Return null instead of nothing
+  if (!personalityData || !movies) {
+    return (
+    <div className="flex justify-center items-center h-screen">
+      <div className="animate-spin w-12 h-12 border-[3px] border-current border-t-transparent text-blue-600 rounded-full" role="status" aria-label="loading">
+        <span className="sr-only">Loading...</span>
+      </div>
+      <div className="text-4xl m-4 text-white font-bold">Finding Movies Based on your Personality...</div>
+    </div>
+    )
   }
 
   return (
     <main className="bg-gray-900">
-      <div className="text-white text-xl p-5 w-3/4">
+      <div className="text-white m-5 text-xl p-5 w-3/4">
         <h2 className="text-4xl font-bold mb-4">
           {personalityData
             ? personalityData?.title

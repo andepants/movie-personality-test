@@ -50,7 +50,6 @@ function getMovieRecommendations(query) {
       }));
 
       recommendations.sort((b, a) => b.popularity - a.popularity);
-
       return recommendations;
     }
 
@@ -65,6 +64,7 @@ export default async function handler(req, res) {
   if (method === "POST") {
     try {
       const data = await getMovieRecommendations(req.body);
+      // console.log(data, 'data inside of POST in recommendationAPI');
       res.status(200).json(data);
     } catch (err) {
       res.status(500).json({ error: err });
