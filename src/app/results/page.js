@@ -5,27 +5,24 @@ import { useState, useEffect } from "react";
 
 export default function Results(props) {
   const [movies, setMovies] = useState(null);
-  // console.log(props);
   const { searchQuery, personalityTitle, personalityDescription } =
     props.searchParams;
   const keywords = Object.keys(props.searchParams)[0];
-  const [ personalityData, setPersonalityData ] = useState(null);
+  const [personalityData, setPersonalityData] = useState(null);
 
   useEffect(() => {
-    // console.log(searchQuery);
-    // console.log(personalityTitle);
-    // console.log(personalityDescription);
-    // console.log(Object.keys(props.searchParams)[0]);
-    getPersonalityType(keywords);
-    getMovieRecommendations(keywords);
+    getMovieRecommendations(keywords); // Call getMovieRecommendations directly
     return () => {};
   }, [keywords]);
 
-  async function getPersonalityType(keywords) {
-    let personalityData = await fetch('/api/personality' , {
-      method: 'POST',
-      body: JSON.stringify({ keywords : keywords})
-    })
+  async function getPersonalityType(filteredMovies) {
+    let personalityData = await fetch("/api/personality", {
+      method: "POST",
+      body: JSON.stringify({
+        keywords: Object.keys(props.searchParams)[0],
+        filteredMovies,
+      }),
+    });
     personalityData = await personalityData.json();
     personalityData = await JSON.parse(personalityData.data);
     setPersonalityData(personalityData);
@@ -44,7 +41,8 @@ export default function Results(props) {
       while (filteredMovies.length != 5) {
         // console.log('responseData[i].title: ', responseData[i].title);
         // console.log('filteredMovies: ', filteredMovies)
-        if ( true
+        if (
+          true
           // responseData[i].title &&
           // englishRegexp.test(responseData[i].title) &&
           // responseData[i].overview.trim()
@@ -54,6 +52,7 @@ export default function Results(props) {
         i++;
       }
       setMovies(filteredMovies);
+      getPersonalityType(filteredMovies); // Call getPersonalityType with filteredMovies
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -61,22 +60,28 @@ export default function Results(props) {
 
   if (!personalityData || !movies) {
     return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="animate-spin w-12 h-12 border-[3px] border-current border-t-transparent text-blue-600 rounded-full" role="status" aria-label="loading">
-        <span className="sr-only">Loading...</span>
+      <div className="flex justify-center items-center h-screen">
+        <div
+          className="animate-spin w-12 h-12 border-[3px] border-current border-t-transparent text-blue-600 rounded-full"
+          role="status"
+          aria-label="loading"
+        >
+          <span className="sr-only">Loading...</span>
+        </div>
+        <div className="text-4xl m-4 text-white font-bold">
+          Finding Movies Based on your Personality...
+        </div>
       </div>
-      <div className="text-4xl m-4 text-white font-bold">Finding Movies Based on your Personality...</div>
-    </div>
-    )
+    );
   }
-  // movieRecommendations.forEach((movie) => {
-  //   console.log(movie.movieId);
-  // });
+
   return (
     <main className="bg-gray-900">
       <div className="text-white m-5 text-xl p-5 w-3/4">
         <h2 className="text-4xl font-bold mb-4">
-          {personalityData ? personalityData?.title : "Loading personality title"}
+          {personalityData
+            ? personalityData?.title
+            : "Loading personality title"}
         </h2>
         <p>
           {personalityData
