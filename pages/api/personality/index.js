@@ -29,8 +29,14 @@ const getPersonalityType = async (keywords) => {
   //   console.log('error', error);
   //   return error;
   // }
-  // return 'You are an Adventurous person!';
-  return `{ "title": "Detective of Suspense and Mysteries", "summary": "You are a Detective of Suspense and Mysteries, known for your skill in unravelling even the darkest of murder and thriller cases." }`;
+
+  let apple = await new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(`{"title": "Detective of Suspense and Mysteries", "summary": "You are a Detective of Suspense and Mysteries, known for your skill in unraveling even the darkest of murder and thriller cases."}`);
+    }, 2000);
+  });
+  // console.log('apple', apple);
+  return apple;
 };
 
 export default async function handler(req, res) {
