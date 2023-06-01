@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import Movie from "./Movie.jsx";
 import { useState, useEffect } from "react";
@@ -40,7 +41,8 @@ export default function Results(props) {
       while (filteredMovies.length != 5) {
         // console.log('responseData[i].title: ', responseData[i].title);
         // console.log('filteredMovies: ', filteredMovies)
-        if ( true
+        if (
+          true
           // responseData[i].title &&
           // englishRegexp.test(responseData[i].title) &&
           // responseData[i].overview.trim()
@@ -58,13 +60,19 @@ export default function Results(props) {
 
   if (!personalityData || !movies) {
     return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="animate-spin w-12 h-12 border-[3px] border-current border-t-transparent text-blue-600 rounded-full" role="status" aria-label="loading">
-        <span className="sr-only">Loading...</span>
+      <div className="flex justify-center items-center h-screen">
+        <div
+          className="animate-spin w-12 h-12 border-[3px] border-current border-t-transparent text-blue-600 rounded-full"
+          role="status"
+          aria-label="loading"
+        >
+          <span className="sr-only">Loading...</span>
+        </div>
+        <div className="text-4xl m-4 text-white font-bold">
+          Finding Movies Based on your Personality...
+        </div>
       </div>
-      <div className="text-4xl m-4 text-white font-bold">Finding Movies Based on your Personality...</div>
-    </div>
-    )
+    );
   }
 
   return (
