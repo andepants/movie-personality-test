@@ -9,7 +9,6 @@ export default function Results(props) {
   const { searchQuery, personalityTitle, personalityDescription } =
     props.searchParams;
   const keywords = Object.keys(props.searchParams)[0];
-  console.log('keywords: ', keywords);
   const [ personalityData, setPersonalityData ] = useState(null);
 
   useEffect(() => {
@@ -28,26 +27,23 @@ export default function Results(props) {
       body: JSON.stringify({ keywords : keywords})
     })
     personalityData = await personalityData.json();
-    console.log(personalityData, 'personalityData');
     personalityData = await JSON.parse(personalityData.data);
     setPersonalityData(personalityData);
   }
 
   async function getMovieRecommendations(query) {
-    console.log('movie recommendations query: ', query);
     try {
       const response = await fetch("/api/recommendationAPI", {
         method: "POST",
         body: query,
       });
       const responseData = await response.json();
-      console.log('responseData: ', responseData)
       let filteredMovies = [];
       let i = 0;
       const englishRegexp = /^[a-zA-Z0-9\s]+$/;
       while (filteredMovies.length != 5) {
-        console.log('responseData[i].title: ', responseData[i].title);
-        console.log('filteredMovies: ', filteredMovies)
+        // console.log('responseData[i].title: ', responseData[i].title);
+        // console.log('filteredMovies: ', filteredMovies)
         if ( true
           // responseData[i].title &&
           // englishRegexp.test(responseData[i].title) &&
@@ -57,7 +53,6 @@ export default function Results(props) {
         }
         i++;
       }
-      console.log('the filtered Movies: ', filteredMovies);
       setMovies(filteredMovies);
     } catch (error) {
       console.error("Error fetching data:", error);

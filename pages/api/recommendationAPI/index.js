@@ -1,7 +1,6 @@
 import moviesData from "./movies_data.json";
 
 function getMovieRecommendations(query) {
-  console.log('query inside of getMovieRecommendations: ', query);
   return new Promise((resolve, reject) => {
     const movies = moviesData.map((movie) => ({
       // Preprocess the movie data
@@ -51,7 +50,6 @@ function getMovieRecommendations(query) {
       }));
 
       recommendations.sort((b, a) => b.popularity - a.popularity);
-      console.log('recommendations: ', recommendations)
       return recommendations;
     }
 

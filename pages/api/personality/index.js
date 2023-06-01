@@ -33,7 +33,7 @@ const getPersonalityType = async (keywords) => {
   let apple = await new Promise((resolve) => {
     setTimeout(() => {
       resolve(`{"title": "Detective of Suspense and Mysteries", "summary": "You are a Detective of Suspense and Mysteries, known for your skill in unraveling even the darkest of murder and thriller cases."}`);
-    }, 4000);
+    }, 2000);
   });
   // console.log('apple', apple);
   return apple;
