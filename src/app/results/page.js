@@ -15,12 +15,11 @@ export default function Results(props) {
     return () => {};
   }, [keywords]);
 
-  async function getPersonalityType(filteredMovies) {
+  async function getPersonalityType(movieTitles) {
     let personalityData = await fetch("/api/personality", {
       method: "POST",
       body: JSON.stringify({
-        keywords: Object.keys(props.searchParams)[0],
-        filteredMovies,
+        keywords: Object.keys(props.searchParams)[0] + " " + movieTitles,
       }),
     });
     personalityData = await personalityData.json();
@@ -52,7 +51,11 @@ export default function Results(props) {
         i++;
       }
       setMovies(filteredMovies);
-      getPersonalityType(filteredMovies); // Call getPersonalityType with filteredMovies
+      let movieTitles = '';
+      for (let i = 0; i < filteredMovies.length; i++) {
+        movieTitles += filteredMovies[i].title + " ";
+      }
+      getPersonalityType(movieTitles);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
