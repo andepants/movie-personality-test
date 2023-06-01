@@ -1,6 +1,7 @@
 import moviesData from "./movies_data.json";
 
 function getMovieRecommendations(query) {
+  console.log('query inside of getMovieRecommendations: ', query);
   return new Promise((resolve, reject) => {
     const movies = moviesData.map((movie) => ({
       // Preprocess the movie data
@@ -50,7 +51,7 @@ function getMovieRecommendations(query) {
       }));
 
       recommendations.sort((b, a) => b.popularity - a.popularity);
-
+      console.log('recommendations: ', recommendations)
       return recommendations;
     }
 
@@ -65,6 +66,7 @@ export default async function handler(req, res) {
   if (method === "POST") {
     try {
       const data = await getMovieRecommendations(req.body);
+      // console.log(data, 'data inside of POST in recommendationAPI');
       res.status(200).json(data);
     } catch (err) {
       res.status(500).json({ error: err });
