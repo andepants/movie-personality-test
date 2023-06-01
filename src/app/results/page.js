@@ -19,7 +19,7 @@ export default function Results(props) {
     getPersonalityType(keywords);
     getMovieRecommendations(keywords);
     return () => {};
-  }, []);
+  }, [keywords]);
 
   async function getPersonalityType(keywords) {
     let personalityData = await fetch('/api/personality' , {
