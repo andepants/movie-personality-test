@@ -32,11 +32,11 @@ export default function Movie(props) {
   }
 
   return (
-    <div className="h-1/2vh p-8 bg-gray-900 text-white">
-      <h1 className="text-4xl font-bold mb-4">{data.title}</h1>
-      <div className="flex items-center">
-        <Image className="rounded-md mr-4" src={posterPath} width="200" height="300" alt="movie poster" />
-        <p className="flex-grow text-justify justify-center">{data.overview}</p>
+    <div className="p-4 bg-gray-900 text-white">
+      <h1 className="text-3xl md:text-4xl font-bold mb-4">{data.title}</h1>
+      <div className="flex flex-col md:flex-row items-center">
+        <Image className="rounded-md mb-4 md:mr-4" src={posterPath} width="200" height="300" alt="movie poster" />
+        <p className="text-justify">{data.overview}</p>
       </div>
     </div>
   );

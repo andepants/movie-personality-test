@@ -49,22 +49,22 @@ export default function Quiz() {
   };
 
   return (
-    <main className="flex flex-col w-screen px-5 h-screen bg-gray-900 justify-center items-center">
-      <div className="bg-gray-900 p-20 m-5 rounded-xl">
-        <div className="flex flex-col items-start w-full">
-          <h4 className="mt-10 text-xl text-white">
+    <main className="flex flex-col w-screen px-2 sm:px-5 h-screen bg-gray-900 justify-center items-center">
+      <div className="bg-gray-900 p-8 sm:p-20 m-2 sm:m-5 rounded-xl">
+        <div className="flex flex-col items-center w-full">
+          <h4 className="mt-4 sm:mt-10 text-lg sm:text-xl text-white text-center">
             Question {currentQuestion + 1} of {questions.length}
           </h4>
-          <div className="mt-4 text-2xl text-white">
+          <div className="mt-2 sm:mt-4 text-lg sm:text-2xl text-white text-center">
             {questions[currentQuestion].question}
           </div>
         </div>
 
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full mt-4">
           {questions[currentQuestion].answerOptions.map((answer, index) => (
             <div
               key={index}
-              className="flex items-center w-full py-4 pl-5 m-2 ml-0 space-x-2 border-2 cursor-pointer bg-gray-800 border-white/10 rounded-xl"
+              className="flex items-center w-full py-2 sm:py-4 pl-3 sm:pl-5 my-2 sm:my-2 ml-0 space-x-2 border-2 cursor-pointer bg-gray-800 border-white/10 rounded-xl"
               onClick={(e) => handleAnswerOption(answer.answer, answer.keywords)}
             >
               <input
@@ -72,21 +72,20 @@ export default function Quiz() {
                 name={answer.answer}
                 value={answer.answer}
                 onChange={(e) => handleAnswerOption(answer.answer, answer.keywords)}
-                checked={
-                  answer.answer ===
-                  selectedOptions[currentQuestion]?.userResponse
-                }
-                className="w-6 h-6 bg-black"
+                checked={answer.answer === selectedOptions[currentQuestion]?.userResponse}
+                className="w-4 h-4 sm:w-6 sm:h-6 bg-black"
               />
-              <p className="ml-6 text-white">{answer.answer}</p>
+              <p className="ml-4 sm:ml-6 text-sm sm:text-base text-white">
+                {answer.answer}
+              </p>
             </div>
           ))}
         </div>
 
-        <div className="flex justify-between w-full mt-4 text-white">
+        <div className="flex flex-col sm:flex-row justify-between w-full mt-4">
           <button
             onClick={handlePrevious}
-            className="w-[49%] py-3 bg-blue-500 rounded-lg"
+            className="w-full sm:w-[49%] py-2 sm:py-3 bg-blue-500 text-white rounded-lg mb-2 sm:mb-0"
           >
             Previous
           </button>
@@ -96,26 +95,20 @@ export default function Quiz() {
                 pathname: "/results",
                 query: searchString,
               }}
-              className="w-[49%] py-3 bg-blue-500 rounded-lg text-center"
+              className="w-full sm:w-[49%] py-2 sm:py-3 bg-blue-500 text-white rounded-lg text-center"
             >
               <button>Submit</button>
             </Link>
           ) : (
             <button
               onClick={handleNext}
-              className="w-[49%] py-3 bg-blue-500 rounded-lg"
+              className="w-full sm:w-[49%] py-2 sm:py-3 bg-blue-500 text-white rounded-lg"
             >
               Next
             </button>
           )}
         </div>
       </div>
-
-      <Link href="/" className="flex justify-center">
-        <button className="px-4 m-2 py-2 rounded bg-blue-500 text-white font-bold">
-          Home
-        </button>
-      </Link>
       <ToastContainer
         position="top-center"
         autoClose={2000}
