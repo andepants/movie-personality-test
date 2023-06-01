@@ -28,5 +28,17 @@ input[type="radio"]:checked:after {
   border: 2px solid #F5F5F5;
 }
 
+/* Media queries for mobile devices */
+@media (max-width: 767px) {
+  input[type="radio"]:after,
+  input[type="radio"]:checked:after {
+    width: 16px;
+    height: 16px;
+    border-radius: 16px;
+    border-width: 1px;
+  }
+}
+
+
 
 

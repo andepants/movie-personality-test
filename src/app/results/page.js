@@ -63,16 +63,12 @@ export default function Results(props) {
 
   if (!personalityData || !movies) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <div
-          className="animate-spin w-12 h-12 border-[3px] border-current border-t-transparent text-blue-600 rounded-full"
-          role="status"
-          aria-label="loading"
-        >
-          <span className="sr-only">Loading...</span>
-        </div>
-        <div className="text-4xl m-4 text-white font-bold">
+      <div className="flex flex-col justify-center items-center h-screen">
+        <div className="text-4xl m-4 text-white font-bold text-center">
           Finding Movies Based on your Personality...
+        </div>
+        <div className="animate-spin w-12 h-12 border-[3px] border-current border-t-transparent text-blue-600 rounded-full" role="status" aria-label="loading">
+          <span className="sr-only">Loading...</span>
         </div>
       </div>
     );
@@ -80,28 +76,27 @@ export default function Results(props) {
 
   return (
     <main className="bg-gray-900">
-      <div className="text-white m-5 text-xl p-5 w-3/4">
-        <h2 className="text-4xl font-bold mb-4">
-          {personalityData
-            ? personalityData?.title
-            : "Loading personality title"}
+      <div className="text-white text-xl p-5 w-full mx-auto md:text-left">
+        <h2 className="text-2xl md:text-4xl font-bold mb-4">
+          {personalityData ? personalityData?.title : "Loading personality title"}
         </h2>
         <p>
-          {personalityData
-            ? personalityData?.summary
-            : "Loading personality description"}
+          {personalityData ? personalityData?.summary : "Loading personality description"}
         </p>
       </div>
-      <div className="grid grid-cols-2 gap-4">
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-center md:text-left">
         {movies.map((movie) => (
           <Movie movieID={movie.movieId} key={movie.movieId} />
         ))}
       </div>
-      <Link href="/" className="flex justify-center">
-        <button className="px-4 m-2 py-2 rounded bg-blue-500 text-white font-bold">
-          Home
-        </button>
-      </Link>
+      <div className="flex justify-center">
+        <Link href="/quiz">
+          <button className="px-4 m-2 mb-8 py-2 rounded bg-blue-500 text-white font-bold">
+            Take the Quiz Again!
+          </button>
+        </Link>
+      </div>
     </main>
   );
 }
