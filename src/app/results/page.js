@@ -51,12 +51,10 @@ export default function Results(props) {
         i++;
       }
       setMovies(filteredMovies);
-      console.log('filteredMovies: ', filteredMovies)
       let movieTitles = '';
       for (let i = 0; i < filteredMovies.length; i++) {
         movieTitles += filteredMovies[i].title + " ";
       }
-      console.log(movieTitles, 'movieTitles');
       getPersonalityType(movieTitles);
     } catch (error) {
       console.error("Error fetching data:", error);

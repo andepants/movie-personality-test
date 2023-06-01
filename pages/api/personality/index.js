@@ -1,5 +1,5 @@
 const getPersonalityType = async (keywords) => {
-  console.log('keywords: ', keywords);
+  // console.log('keywords: ', keywords);
   const apiKey = process.env.OPENAI_API_KEY;
   const model = "text-davinci-003";
   const maxTokens = 200;
@@ -22,7 +22,6 @@ const getPersonalityType = async (keywords) => {
     });
     if (response.ok) {
       const responseData = await response.json();
-      console.log('responseData: ', responseData.choices[0].text.replace(/\\/g, ''));
       return responseData.choices[0].text.replace(/\\/g, '');
     }
   } catch (error) {
