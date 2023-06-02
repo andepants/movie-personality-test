@@ -20,7 +20,7 @@ export const questions = [
   },
   {
     question:
-      "How do you feel about witnessing and exploring the darker aspects of human nature and the portrayal of violence in life?",
+      "How do you feel about witnessing or exploring the darker aspects of human nature or the portrayal of violence in life?",
     answerOptions: [
       {
         answer:
@@ -227,7 +227,7 @@ export const questions = [
     answerOptions: [
       {
         answer: "Yes",
-        keywords: "Romantic, Love, Relationships, date, boyfriend, girlfriend",
+        keywords: "Romantic, Love, Passion, dates, Soulmates, Intimacy",
       },
       {
         answer: "Occasionally",
