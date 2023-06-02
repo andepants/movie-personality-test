@@ -65,7 +65,7 @@ export default function Results(props) {
     return (
       <div className="flex flex-col justify-center items-center h-screen">
         <div className="text-2xl m-4 text-white font-bold text-center">
-          Unveiling Movie Matches: Determining Movie Recommendations based on your Personality ...
+          Unveiling Movie Matches: Determining Movie Recommendations based on your Personality...
         </div>
         <div className="animate-spin w-12 h-12 border-[3px] border-current border-t-transparent text-blue-600 rounded-full" role="status" aria-label="loading">
           <span className="sr-only">Loading...</span>
