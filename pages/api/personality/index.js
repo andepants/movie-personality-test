@@ -3,8 +3,7 @@ const getPersonalityType = async (keywords) => {
   const apiKey = process.env.OPENAI_API_KEY;
   const model = "text-davinci-003";
   const maxTokens = 200;
-  let finalPrompt = `Give me a personality title AND 3 sentences of a personality summary starting with "You are". Keywords: ${keywords} Format 1 JSON OBJECT{ "title" :  "title", "summary": "summary" }`;
-
+  let finalPrompt = `Give me a personality title AND 3 sentences of a personality summary starting with "You are". Keywords: ${keywords}. Formatted as a JSON OBJECT: { "title" : "title", "summary": "summary" }`;
   const apiUrl = `https://api.openai.com/v1/engines/${model}/completions`;
   const headers = {
     "Content-Type": "application/json",
