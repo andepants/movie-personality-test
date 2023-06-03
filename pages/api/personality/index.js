@@ -1,5 +1,4 @@
 const getPersonalityType = async (keywords) => {
-  // console.log('keywords: ', keywords);
   const apiKey = process.env.OPENAI_API_KEY;
   const model = "text-davinci-003";
   const maxTokens = 200;
@@ -27,7 +26,7 @@ const getPersonalityType = async (keywords) => {
     console.log('error', error);
     return error;
   }
-
+  // Used to not hit the OpenAI API
   // let apple = await new Promise((resolve) => {
   //   setTimeout(() => {
   //     resolve(`{"title": "Detective of Suspense and Mysteries", "summary": "You are a Detective of Suspense and Mysteries, known for your skill in unraveling even the darkest of murder and thriller cases."}`);
