@@ -1,7 +1,7 @@
 
 # Movie Personality Test
 
-Receive Movie Recommendations Based on your Personality! [Deployed Here](https://movie-personality-test.vercel.app/)
+Receive Movie Recommendations Based on your Personality! [moviepersonalitytest.com](https://www.moviepersonalitytest.com/)
 
 
 ## Authors
