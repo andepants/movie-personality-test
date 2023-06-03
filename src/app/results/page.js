@@ -5,61 +5,56 @@ import { useState, useEffect } from "react";
 
 export default function Results(props) {
   const [movies, setMovies] = useState(null);
-  const { searchQuery, personalityTitle, personalityDescription } =
-    props.searchParams;
   const keywords = Object.keys(props.searchParams)[0];
   const [personalityData, setPersonalityData] = useState(null);
 
   useEffect(() => {
-    getMovieRecommendations(keywords); // Call getMovieRecommendations directly
-    return () => {};
-  }, [keywords]);
-
-  async function getPersonalityType(movieTitles) {
-    let personalityData = await fetch("/api/personality", {
-      method: "POST",
-      body: JSON.stringify({
-        keywords: Object.keys(props.searchParams)[0] + " " + movieTitles,
-      }),
-    });
-    personalityData = await personalityData.json();
-    personalityData = await JSON.parse(personalityData.data);
-    setPersonalityData(personalityData);
-  }
-
-  async function getMovieRecommendations(query) {
-    try {
-      const response = await fetch("/api/recommendationAPI", {
+    async function getPersonalityType(movieTitles) {
+      let personalityData = await fetch("/api/personality", {
         method: "POST",
-        body: query,
+        body: JSON.stringify({
+          keywords: Object.keys(props.searchParams)[0] + " " + movieTitles,
+        }),
       });
-      const responseData = await response.json();
-      let filteredMovies = [];
-      let i = 0;
-      const englishRegexp = /^[a-zA-Z0-9\s]+$/;
-      while (filteredMovies.length != 5) {
-        // console.log('responseData[i].title: ', responseData[i].title);
-        // console.log('filteredMovies: ', filteredMovies)
-        if (
-          true
-          // responseData[i].title &&
-          // englishRegexp.test(responseData[i].title) &&
-          // responseData[i].overview.trim()
-        ) {
-          filteredMovies.push(responseData[i]);
-        }
-        i++;
-      }
-      setMovies(filteredMovies);
-      let movieTitles = '';
-      for (let i = 0; i < filteredMovies.length; i++) {
-        movieTitles += filteredMovies[i].title + " ";
-      }
-      getPersonalityType(movieTitles);
-    } catch (error) {
-      console.error("Error fetching data:", error);
+      personalityData = await personalityData.json();
+      personalityData = await JSON.parse(personalityData.data);
+      setPersonalityData(personalityData);
     }
-  }
+
+    async function getMovieRecommendations(query) {
+      try {
+        const response = await fetch("/api/recommendationAPI", {
+          method: "POST",
+          body: query,
+        });
+        const responseData = await response.json();
+        let filteredMovies = [];
+        let i = 0;
+        const englishRegexp = /^[a-zA-Z0-9\s]+$/;
+        while (filteredMovies.length != 5) {
+          if (
+            true
+            // responseData[i].title &&
+            // englishRegexp.test(responseData[i].title) &&
+            // responseData[i].overview.trim()
+          ) {
+            filteredMovies.push(responseData[i]);
+          }
+          i++;
+        }
+        setMovies(filteredMovies);
+        let movieTitles = '';
+        for (let i = 0; i < filteredMovies.length; i++) {
+          movieTitles += filteredMovies[i].title + " ";
+        }
+        getPersonalityType(movieTitles);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    getMovieRecommendations(keywords);
+    return () => {};
+  }, [keywords, props.searchParams]);
 
   if (!personalityData || !movies) {
     return (
