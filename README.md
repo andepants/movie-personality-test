@@ -4,7 +4,7 @@
 Receive Movie Recommendations Based on your Personality! [Deployed Here](https://movie-personality-test.vercel.app/)
 
 
-## Author
+## Authors
 
 - GitHub: [@andepants](https://github.com/andepants)
 - Github: [@dmwcats123](https://github.com/dmwcats123)
