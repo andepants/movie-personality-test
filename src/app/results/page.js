@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 
 export default function Results(props) {
   const [movies, setMovies] = useState(null);
-  const keywords = Object.keys(props.searchParams)[0];
   const [personalityData, setPersonalityData] = useState(null);
 
   useEffect(() => {
@@ -58,9 +57,10 @@ export default function Results(props) {
         console.error("Error fetching data:", error);
       }
     }
+    const keywords = Object.keys(props.searchParams)[0];
     getMovieRecommendations(keywords);
     return () => {};
-  }, [keywords, props.searchParams]);
+  }, [ props.searchParams ]);
 
   if (!personalityData || !movies) {
     return (
