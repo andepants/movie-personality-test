@@ -22,6 +22,7 @@ export default function Results(props) {
     }
 
     async function getMovieRecommendations(query) {
+      console.log('query', query);
       try {
         const response = await fetch("/api/recommendationAPI", {
           method: "POST",
