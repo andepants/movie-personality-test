@@ -31,12 +31,12 @@ export default function Results(props) {
         let filteredMovies = [];
         let i = 0;
         const englishRegexp = /^[a-zA-Z0-9\s]+$/;
-        while (filteredMovies.length != 5) {
+        while (filteredMovies.length != 10) {
           if (
-            true
-            // responseData[i].title &&
-            // englishRegexp.test(responseData[i].title) &&
-            // responseData[i].overview.trim()
+            // true
+            responseData[i]?.title &&
+            englishRegexp.test(responseData[i]?.title) &&
+            responseData[i]?.overview.trim()
           ) {
             filteredMovies.push(responseData[i]);
           }
@@ -47,7 +47,7 @@ export default function Results(props) {
         for (let i = 0; i < filteredMovies.length; i++) {
           movieTitles += filteredMovies[i].title + " ";
         }
-        getPersonalityType(movieTitles);
+        getPersonalityType();
       } catch (error) {
         console.error("Error fetching data:", error);
       }

@@ -27,7 +27,7 @@ function getMovieRecommendations(query) {
     }
 
     // Get movie recommendations based on a search query
-    function getMovieRecommendations(query, movies, topN = 7) {
+    function getMovieRecommendations(query, movies, topN = 20) {
       // Calculate cosine similarity
       const similarities = calculateCosineSimilarity(query, movies);
 

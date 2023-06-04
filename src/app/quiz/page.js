@@ -108,6 +108,21 @@ export default function Quiz() {
             </button>
           )}
         </div>
+       {searchString.length > 10 && currentQuestion > 3 ? (
+        <div className="flex flex-col sm:flex-row justify-center w-full mt-20">
+          <Link
+            href={{
+              pathname: "/results",
+              query: searchString,
+            }}
+            className="w-full sm:w-[25%] py-2 sm:py-3 bg-blue-500 text-white rounded-lg text-center"
+          >
+            <button>Get Results Now!</button>
+          </Link>
+        </div>
+       ) : (
+          <div className="flex flex-col sm:flex-row justify-center w-full mt-20 p-3"></div>
+       )}
       </div>
       <ToastContainer
         position="top-center"
