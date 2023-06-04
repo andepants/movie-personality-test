@@ -26,6 +26,9 @@ export default function Results(props) {
         const response = await fetch("/api/recommendationAPI", {
           method: "POST",
           body: query,
+          headers: {
+            "Cache-Control": "no-store",
+          },
         });
         const responseData = await response.json();
         let filteredMovies = [];
