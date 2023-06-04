@@ -13,7 +13,7 @@ export default function Results(props) {
       let personalityData = await fetch("/api/personality", {
         method: "POST",
         body: JSON.stringify({
-          keywords: Object.keys(props.searchParams)[0] + " " + movieTitles,
+          keywords: Object.keys(props.searchParams)[0],
         }),
       });
       personalityData = await personalityData.json();
