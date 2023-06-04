@@ -33,10 +33,10 @@ export default function Results(props) {
         const englishRegexp = /^[a-zA-Z0-9\s]+$/;
         while (filteredMovies.length != 10) {
           if (
-            // true
-            responseData[i]?.title &&
-            englishRegexp.test(responseData[i]?.title) &&
-            responseData[i]?.overview.trim()
+            true
+            // responseData[i]?.title &&
+            // englishRegexp.test(responseData[i]?.title) &&
+            // responseData[i]?.overview.trim()
           ) {
             filteredMovies.push(responseData[i]);
           }
