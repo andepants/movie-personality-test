@@ -20,6 +20,7 @@ export default function Results(props) {
   }
 
   async function getMovieRecommendations(query) {
+    console.log('query', Object.keys(props.searchParams)[0]);
     try {
       const response = await fetch("/api/recommendationAPI", {
         method: "POST",
@@ -29,6 +30,7 @@ export default function Results(props) {
         },
       });
       const responseData = await response.json();
+      console.log('responseData', responseData);
       let filteredMovies = [];
       let i = 0;
       const englishRegexp = /^[a-zA-Z0-9\s]+$/;
@@ -43,6 +45,7 @@ export default function Results(props) {
         }
         i++;
       }
+      console.log('filteredMovies', filteredMovies)
       setMovies(filteredMovies);
       let movieTitles = '';
       for (let i = 0; i < filteredMovies.length; i++) {
