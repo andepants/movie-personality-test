@@ -2,16 +2,19 @@
 import Link from "next/link";
 import Movie from "./Movie.jsx";
 import { useState, useEffect } from "react";
+import { useSearchParams } from 'next/navigation';
 
 export default function Results(props) {
   const [movies, setMovies] = useState(null);
   const [personalityData, setPersonalityData] = useState(null);
+  const searchParams = useSearchParams();
+  const search = searchParams.get('search');
 
   async function getPersonalityType(movieTitles) {
     let personalityData = await fetch("/api/personality", {
       method: "POST",
       body: JSON.stringify({
-        keywords: Object.keys(props.searchParams)[0],
+        keywords: search,
       }),
     });
     personalityData = await personalityData.json();
@@ -20,17 +23,12 @@ export default function Results(props) {
   }
 
   async function getMovieRecommendations(query) {
-    console.log('query', Object.keys(props.searchParams)[0]);
     try {
       const response = await fetch("/api/recommendationAPI", {
         method: "POST",
-        body: Object.keys(props.searchParams)[0],
-        headers: {
-          "Cache-Control": "no-store",
-        },
+        body: JSON.stringify({ search : search }),
       });
       const responseData = await response.json();
-      console.log('responseData', responseData);
       let filteredMovies = [];
       let i = 0;
       const englishRegexp = /^[a-zA-Z0-9\s]+$/;
@@ -45,13 +43,12 @@ export default function Results(props) {
         }
         i++;
       }
-      console.log('filteredMovies', filteredMovies)
       setMovies(filteredMovies);
       let movieTitles = '';
       for (let i = 0; i < filteredMovies.length; i++) {
         movieTitles += filteredMovies[i].title + " ";
       }
-      getPersonalityType();
+      getPersonalityType(search);
     } catch (error) {
       console.error("Error fetching data:", error);
     }

@@ -62,7 +62,7 @@ export default async function handler(req, res) {
   const method = req.method;
   if (method === "POST") {
     try {
-      const data = await getMovieRecommendations(req.body);
+      const data = await getMovieRecommendations((JSON.parse(req.body)).search.trim().replace(/,/g, ''));
       res.status(200).json(data);
     } catch (err) {
       res.status(500).json({ error: err });

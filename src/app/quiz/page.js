@@ -93,7 +93,7 @@ export default function Quiz() {
             <Link
               href={{
                 pathname: "/results",
-                query: searchString,
+                query: { search : searchString },
               }}
               className="w-full sm:w-[49%] py-2 sm:py-3 bg-blue-500 text-white rounded-lg text-center"
             >
@@ -113,7 +113,7 @@ export default function Quiz() {
           <Link
             href={{
               pathname: "/results",
-              query: searchString,
+              query: { search : searchString },
             }}
             className="w-full sm:w-[25%] py-2 sm:py-3 bg-blue-500 text-white rounded-lg text-center"
           >
