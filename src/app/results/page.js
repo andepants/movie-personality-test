@@ -7,6 +7,8 @@ export default function Results(props) {
   const [movies, setMovies] = useState(null);
   const [personalityData, setPersonalityData] = useState(null);
   const keywords = Object.keys(props.searchParams)[0];
+  console.log('keywords', keywords)
+  console.log('props.searchParams', props.searchParams)
 
   async function getPersonalityType(movieTitles) {
     let personalityData = await fetch("/api/personality", {
