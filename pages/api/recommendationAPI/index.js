@@ -60,9 +60,6 @@ function getMovieRecommendations(query) {
 
 export default async function handler(req, res) {
   const method = req.method;
-
-  console.log('req.body', req.body)
-
   if (method === "POST") {
     try {
       const data = await getMovieRecommendations(req.body);

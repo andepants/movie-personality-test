@@ -6,9 +6,6 @@ import { useState, useEffect } from "react";
 export default function Results(props) {
   const [movies, setMovies] = useState(null);
   const [personalityData, setPersonalityData] = useState(null);
-  const keywords = Object.keys(props.searchParams)[0];
-  console.log('keywords', keywords)
-  console.log('props.searchParams', props.searchParams)
 
   async function getPersonalityType(movieTitles) {
     let personalityData = await fetch("/api/personality", {
@@ -23,17 +20,15 @@ export default function Results(props) {
   }
 
   async function getMovieRecommendations(query) {
-    console.log('query', query);
     try {
       const response = await fetch("/api/recommendationAPI", {
         method: "POST",
-        body: query,
+        body: Object.keys(props.searchParams)[0],
         headers: {
           "Cache-Control": "no-store",
         },
       });
       const responseData = await response.json();
-      console.log('responseData', responseData);
       let filteredMovies = [];
       let i = 0;
       const englishRegexp = /^[a-zA-Z0-9\s]+$/;
@@ -48,7 +43,6 @@ export default function Results(props) {
         }
         i++;
       }
-      console.log('filteredMovies', filteredMovies)
       setMovies(filteredMovies);
       let movieTitles = '';
       for (let i = 0; i < filteredMovies.length; i++) {
@@ -61,9 +55,9 @@ export default function Results(props) {
   }
 
   useEffect(() => {
-    getMovieRecommendations(keywords);
+    getMovieRecommendations();
     return () => {};
-  }, [keywords]);
+  }, []);
 
   if (!personalityData || !movies) {
     return (
