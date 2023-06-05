@@ -6,61 +6,62 @@ import { useState, useEffect } from "react";
 export default function Results(props) {
   const [movies, setMovies] = useState(null);
   const [personalityData, setPersonalityData] = useState(null);
+  const keywords = Object.keys(props.searchParams)[0];
+
+  async function getPersonalityType(movieTitles) {
+    let personalityData = await fetch("/api/personality", {
+      method: "POST",
+      body: JSON.stringify({
+        keywords: Object.keys(props.searchParams)[0],
+      }),
+    });
+    personalityData = await personalityData.json();
+    personalityData = await JSON.parse(personalityData.data);
+    setPersonalityData(personalityData);
+  }
+
+  async function getMovieRecommendations(query) {
+    console.log('query', query);
+    try {
+      const response = await fetch("/api/recommendationAPI", {
+        method: "POST",
+        body: query,
+        headers: {
+          "Cache-Control": "no-store",
+        },
+      });
+      const responseData = await response.json();
+      console.log('responseData', responseData);
+      let filteredMovies = [];
+      let i = 0;
+      const englishRegexp = /^[a-zA-Z0-9\s]+$/;
+      while (filteredMovies.length != 10) {
+        if (
+          true
+          // responseData[i]?.title &&
+          // englishRegexp.test(responseData[i]?.title) &&
+          // responseData[i]?.overview.trim()
+        ) {
+          filteredMovies.push(responseData[i]);
+        }
+        i++;
+      }
+      console.log('filteredMovies', filteredMovies)
+      setMovies(filteredMovies);
+      let movieTitles = '';
+      for (let i = 0; i < filteredMovies.length; i++) {
+        movieTitles += filteredMovies[i].title + " ";
+      }
+      getPersonalityType();
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
 
   useEffect(() => {
-    async function getPersonalityType(movieTitles) {
-      let personalityData = await fetch("/api/personality", {
-        method: "POST",
-        body: JSON.stringify({
-          keywords: Object.keys(props.searchParams)[0],
-        }),
-      });
-      personalityData = await personalityData.json();
-      personalityData = await JSON.parse(personalityData.data);
-      setPersonalityData(personalityData);
-    }
-
-    async function getMovieRecommendations(query) {
-      console.log('query', query);
-      try {
-        const response = await fetch("/api/recommendationAPI", {
-          method: "POST",
-          body: query,
-          headers: {
-            "Cache-Control": "no-store",
-          },
-        });
-        const responseData = await response.json();
-        console.log('responseData', responseData);
-        let filteredMovies = [];
-        let i = 0;
-        const englishRegexp = /^[a-zA-Z0-9\s]+$/;
-        while (filteredMovies.length != 10) {
-          if (
-            true
-            // responseData[i]?.title &&
-            // englishRegexp.test(responseData[i]?.title) &&
-            // responseData[i]?.overview.trim()
-          ) {
-            filteredMovies.push(responseData[i]);
-          }
-          i++;
-        }
-        console.log('filteredMovies', filteredMovies)
-        setMovies(filteredMovies);
-        let movieTitles = '';
-        for (let i = 0; i < filteredMovies.length; i++) {
-          movieTitles += filteredMovies[i].title + " ";
-        }
-        getPersonalityType();
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    }
-    const keywords = Object.keys(props.searchParams)[0];
     getMovieRecommendations(keywords);
     return () => {};
-  }, [ props.searchParams ]);
+  }, [keywords]);
 
   if (!personalityData || !movies) {
     return (
